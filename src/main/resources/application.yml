@@ -14,7 +14,7 @@ spring:
       bindings: 
         direct-smtp-gateway-message-output: 
           destination: direct-smtp-mq-gateway
-          content-type: message/rfc822 
+          #content-type: message/rfc822 
           
         direct-smtp-gateway-message-input:
           destination: direct-smtp-mq-gateway
@@ -27,7 +27,7 @@ spring:
             
         direct-sta-processor-output: 
           destination: direct-sta-process
-          content-type: message/rfc822 
+          #content-type: message/rfc822 
           
         direct-sta-processor-input: 
           destination: direct-sta-process    
@@ -40,7 +40,7 @@ spring:
           
         direct-sta-post-process-output: 
           destination: direct-sta-post-process
-          content-type: message/rfc822 
+          #content-type: message/rfc822 
           
         direct-sta-post-process-input: 
           destination: direct-sta-post-process   
@@ -53,7 +53,7 @@ spring:
             
         direct-smtp-remote-delivery-output: 
           destination: direct-remote-delivery-process
-          content-type: message/rfc822 
+          #content-type: message/rfc822 
         
         #Default to max 5 attempts, retry at 6 minutes, then multiply by a factor of 4 for each retry  
         direct-smtp-remote-delivery-input: 
@@ -69,7 +69,7 @@ spring:
        
         direct-xd-delivery-output: 
           destination: direct-xd-delivery-process
-          content-type: message/rfc822             
+          #content-type: message/rfc822             
           
         direct-xd-delivery-input: 
           destination: direct-xd-delivery    
