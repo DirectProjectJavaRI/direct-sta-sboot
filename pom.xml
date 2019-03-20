@@ -149,27 +149,27 @@
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-msg-monitor-model</artifactId>
-			<version>6.0.1-SNAPSHOT</version>
+			<version>6.0</version>
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-common</artifactId>
-			<version>6.0.1-SNAPSHOT</version>	
+			<version>6.0</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>gateway</artifactId>
-			<version>6.0.2-SNAPSHOT</version>	
+			<version>6.0.2</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>agent</artifactId>
-			<version>6.0.3-SNAPSHOT</version>	
+			<version>6.0.2</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>xdmail</artifactId>
-			<version>6.0.1-SNAPSHOT</version>	
+			<version>6.0</version>	
 		</dependency>					 		 
 	      <dependency>
 			<groupId>commons-net</groupId>
