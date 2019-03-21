@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nhind</groupId>
 	<artifactId>direct-sta-sboot</artifactId>
-	<version>6.0.1-SNAPSHOT</version>
+	<version>6.0</version>
 	<packaging>jar</packaging>
 	<name>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</name>
     <description>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</description>	
@@ -284,8 +284,7 @@
 	                </goals>
 	              </execution>
 	            </executions>					
-			</plugin>		
-			<!--  for releases only 			
+			</plugin>				
 	        <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-gpg-plugin</artifactId>
@@ -299,7 +298,6 @@
                  </execution>
                </executions>
             </plugin>
-			-->
 		</plugins>			
 	</build>
 	<reporting>
