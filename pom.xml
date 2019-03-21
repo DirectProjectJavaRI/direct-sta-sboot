@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nhind</groupId>
 	<artifactId>direct-sta-sboot</artifactId>
-	<version>6.0-SNAPSHOT</version>
+	<version>6.0</version>
 	<packaging>jar</packaging>
 	<name>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</name>
     <description>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</description>	
@@ -18,7 +18,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.2.RELEASE</version>     
+		<version>2.1.3.RELEASE</version>     
 		<relativePath />
 	</parent>	
     <developers>
@@ -37,14 +37,7 @@
           <name>New BSD License</name>
           <url>http://nhindirect.org/BSDLicense</url>
        </license>
-    </licenses>
-	 <repositories>
-       <repository>
-           <id>spring-milestone</id>
-           <name>Spring Milestone Releases</name>
-           <url>https://repo.spring.io/milestone/</url>
-       </repository>
-    </repositories>          
+    </licenses>       
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -53,21 +46,21 @@
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>2.1.2.RELEASE</version>
+				<version>2.1.3.RELEASE</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 	        <dependency>
 	            <groupId>io.pivotal.spring.cloud</groupId>
 	            <artifactId>spring-cloud-services-dependencies</artifactId>
-	            <version>2.0.3.RELEASE</version>
+	            <version>2.1.1.RELEASE</version>
 	            <type>pom</type>
 	            <scope>import</scope>
 	        </dependency>				
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-parent</artifactId>
-				 <version>Greenwich.RC1</version>
+				 <version>Greenwich.SR1</version>
 				<type>pom</type>
 				<scope>import</scope>		
 			</dependency>											
@@ -149,27 +142,27 @@
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-msg-monitor-model</artifactId>
-			<version>6.0-SNAPSHOT</version>
+			<version>6.0</version>
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-common</artifactId>
-			<version>6.0-SNAPSHOT</version>	
+			<version>6.0</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>gateway</artifactId>
-			<version>6.0-SNAPSHOT</version>	
+			<version>6.0.2</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>agent</artifactId>
-			<version>6.0-SNAPSHOT</version>	
+			<version>6.0.2</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>xdmail</artifactId>
-			<version>6.0-SNAPSHOT</version>	
+			<version>6.0</version>	
 		</dependency>					 		 
 	      <dependency>
 			<groupId>commons-net</groupId>
@@ -257,23 +250,6 @@
 				</configuration>
 			</plugin>		      		
 			<plugin>
-				<groupId>com.atlassian.maven.plugins</groupId>
-				<artifactId>maven-clover2-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<jdk>1.8</jdk>
-					<licenseLocation>${project.basedir}/../../licenses/clover.license</licenseLocation>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>pre-site</phase>
-						<goals>
-							<goal>instrument</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<!-- Spring is not very good at finding Entity objects in jar files that are nested
@@ -289,11 +265,10 @@
 			        </requiresUnpack>			        
 			    </configuration>				
 			</plugin>				
-			<!--  for releases only 
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.6.1</version>
+				<version>2.9.1</version>
 				<configuration>
 					<charset>UTF-8</charset>
 					<docencoding>UTF-8</docencoding>
@@ -309,7 +284,8 @@
 	                </goals>
 	              </execution>
 	            </executions>					
-			</plugin>			
+			</plugin>		
+			<!--  for releases only 			
 	        <plugin>
                <groupId>org.apache.maven.plugins</groupId>
                <artifactId>maven-gpg-plugin</artifactId>
@@ -323,7 +299,7 @@
                  </execution>
                </executions>
             </plugin>
-            -->				
+			-->
 		</plugins>			
 	</build>
 	<reporting>
@@ -336,7 +312,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>3.0.1</version>
+				<version>2.9.1</version>
 				<configuration>
 					<charset>UTF-8</charset>
 					<docencoding>UTF-8</docencoding>
@@ -365,29 +341,8 @@
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>1.2</version>
 				<configuration>
 					<effort>Max</effort>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>taglist-maven-plugin</artifactId>
-				<configuration>
-					<tags>
-						<tag>FIXME</tag>
-						<tag>TODO</tag>
-						<tag>WARN</tag>
-						<tag>@deprecated</tag>
-					</tags>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.atlassian.maven.plugins</groupId>
-				<artifactId>maven-clover2-plugin</artifactId>
-				<version>3.0.2</version>
-				<configuration>
-					<licenseLocation>${project.basedir}/../../licenses/clover.license</licenseLocation>
 				</configuration>
 			</plugin>
 		</plugins>
