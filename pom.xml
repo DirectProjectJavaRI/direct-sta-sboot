@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nhind</groupId>
 	<artifactId>direct-sta-sboot</artifactId>
-	<version>6.0.1</version>
+	<version>8.0.0</version>
 	<packaging>jar</packaging>
 	<name>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</name>
     <description>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</description>	
@@ -13,14 +13,14 @@
 		<connection>scm:git:https://github.com/DirectProject/direct-sta-sboot.git</connection>
 	</scm>
     <prerequisites>
-        <maven>3.0.0</maven>
+        <maven>3.5.0</maven>
     </prerequisites>  	
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.9.RELEASE</version>     
-		<relativePath />
-	</parent>	
+    <parent>
+	   <groupId>org.springframework.boot</groupId>
+	   <artifactId>spring-boot-starter-parent</artifactId>
+	   <version>2.5.2</version>
+	   <relativePath />
+    </parent>	
     <developers>
         <developer>
             <name>Greg Meyer</name>
@@ -40,50 +40,40 @@
     </licenses>       
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <bcprov-jdk15on.version>1.68</bcprov-jdk15on.version>
+        <bcmail-jdk15on.version>1.68</bcmail-jdk15on.version>	
+        <bcpkix-jdk15on.version>1.68</bcpkix-jdk15on.version>	
 	</properties>
 	<dependencyManagement>
 		<dependencies>											
 			<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-dependencies</artifactId>
-				<version>2.1.9.RELEASE</version>
+				<version>2.5.2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
 	        <dependency>
 	            <groupId>io.pivotal.spring.cloud</groupId>
 	            <artifactId>spring-cloud-services-dependencies</artifactId>
-	            <version>2.1.4.RELEASE</version>
+	            <version>3.2.1.RELEASE</version>
 	            <type>pom</type>
 	            <scope>import</scope>
-	        </dependency>				
+	        </dependency>			
 			<dependency>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-starter-parent</artifactId>
-				 <version>Greenwich.SR3</version>
+				 <version>2020.0.3</version>
 				<type>pom</type>
 				<scope>import</scope>		
-			</dependency>											
+			</dependency>												
 		</dependencies>
 	</dependencyManagement>		
 	<dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>         
-        </dependency>	
-	    <dependency>
-	    	<groupId>org.springframework.boot</groupId>
-	    	<artifactId>spring-boot-starter-tomcat</artifactId>
-	    	<scope>provided</scope>
-	    </dependency>  	          	
-	    <dependency>
-	        <groupId>org.springframework.cloud</groupId>
-	        <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
-	    </dependency>	        
-	    <dependency>
-		    <groupId>org.springframework.boot</groupId>
-		    <artifactId>spring-boot-starter-data-jpa</artifactId>
-	    </dependency>	
+        </dependency>	 	          	        	
 	    <dependency>
 	    	<groupId>org.springframework.boot</groupId>
 	    	<artifactId>spring-boot-starter-security</artifactId>
@@ -91,7 +81,11 @@
 	    <dependency>
 	        <groupId>org.springframework.boot</groupId>
 	        <artifactId>spring-boot-configuration-processor</artifactId>
-	    </dependency>  
+	    </dependency> 
+		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
+		</dependency>	     
 		<dependency>
   			<groupId>org.springframework.boot</groupId>
   			<artifactId>spring-boot-starter-actuator</artifactId>
@@ -142,27 +136,27 @@
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-msg-monitor-model</artifactId>
-			<version>6.0</version>
+			<version>8.0.0</version>
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-common</artifactId>
-			<version>6.0.1</version>	
+			<version>8.0.0</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>gateway</artifactId>
-			<version>6.0.3</version>	
+			<version>8.0.0</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>agent</artifactId>
-			<version>6.0.3</version>	
+			<version>8.0.0</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>xdmail</artifactId>
-			<version>6.0</version>	
+			<version>8.0.0</version>	
 		</dependency>					 		 
 	      <dependency>
 			<groupId>commons-net</groupId>
@@ -172,23 +166,18 @@
 		  <dependency>
 		    <groupId>org.bouncycastle</groupId>
 		    <artifactId>bcprov-jdk15on</artifactId>
-		    <version>1.60</version>    
+		    <version>${bcprov-jdk15on.version}</version>    
 		  </dependency>  
 		  <dependency>
 		    <groupId>org.bouncycastle</groupId>
 		    <artifactId>bcmail-jdk15on</artifactId>
-		    <version>1.60</version>	    
+		    <version>${bcmail-jdk15on.version}</version>	    
 		  </dependency>
 		  <dependency>
 		    <groupId>org.bouncycastle</groupId>
 		    <artifactId>bcpkix-jdk15on</artifactId>
-		    <version>1.60</version>    
-		 </dependency> 
-		 <dependency>
-		    <groupId>com.google.guava</groupId>
-		    <artifactId>guava</artifactId>
-		    <version>18.0</version>    
-		 </dependency>			 		    	
+		    <version>${bcpkix-jdk15on.version}</version>    
+		 </dependency> 	 		    	
 		 <!--  Database Drivers For Connectivity Options --> 		             	    
 		<dependency>
 		    <groupId>com.h2database</groupId>
@@ -258,7 +247,7 @@
 			    -->
 			    <configuration>
 		            <jvmArguments>
-		              -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5005
+		              -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5006
 		            </jvmArguments>			    
 			        <requiresUnpack>
 			            <dependency>

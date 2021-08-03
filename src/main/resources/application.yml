@@ -8,14 +8,25 @@ direct:
           name: admin
           password: d1r3ct;
 
+  config:
+    service:
+      url: http://localhost:8080/config-service
+  msgmonitor:
+    service:
+      url: http://localhost:8080/msg-monitor
+
 spring: 
   cloud: 
     stream: 
+      source: direct-smtp-gateway-message;direct-smtp-remote-delivery;direct-sta-processor;direct-sta-post-process;direct-sta-last-mile;direct-xd-delivery
+      function:
+        definition: directSmtpGatewayMessageInput;directStaProcessorInput;directStaPostProcessInput;directSmtpRemoteDeliveryInput;directXDDeliveryInput
+    
       bindings: 
-        direct-smtp-gateway-message-output: 
+        direct-smtp-gateway-message-out-0:
           destination: direct-smtp-mq-gateway
           
-        direct-smtp-gateway-message-input:
+        directSmtpGatewayMessageInput-in-0:
           destination: direct-smtp-mq-gateway
           group: direct-sta-mq-gateway-message-group
           consumer:
@@ -24,10 +35,10 @@ spring:
             backOffInitialInterval: 15000
             backOffMaxInterval: 60000   
             
-        direct-sta-processor-output: 
+        direct-sta-processor-out-0: 
           destination: direct-sta-process
           
-        direct-sta-processor-input: 
+        directStaProcessorInput-in-0: 
           destination: direct-sta-process    
           group: direct-sta-process-message-group
           consumer:
@@ -36,10 +47,10 @@ spring:
             backOffInitialInterval: 15000
             backOffMaxInterval: 60000   
           
-        direct-sta-post-process-output: 
+        direct-sta-post-process-out-0:
           destination: direct-sta-post-process
           
-        direct-sta-post-process-input: 
+        directStaPostProcessInput-in-0: 
           destination: direct-sta-post-process   
           group: direct-sta-post-process-message-group
           consumer:
@@ -48,11 +59,11 @@ spring:
             backOffInitialInterval: 15000
             backOffMaxInterval: 60000    
             
-        direct-smtp-remote-delivery-output: 
+        direct-smtp-remote-delivery-out-0:
           destination: direct-remote-delivery-process
         
         #Default to max 5 attempts, retry at 6 minutes, then multiply by a factor of 4 for each retry  
-        direct-smtp-remote-delivery-input: 
+        directSmtpRemoteDeliveryInput-in-0: 
           destination: direct-remote-delivery-process
           group: direct-sta-remoted-delivery-group
           consumer:
@@ -60,16 +71,15 @@ spring:
             maxAttempts: 5
             backOffInitialInterval: 360000 
             backOffMaxInterval: 92160000  
-            backOffMultiplier: 4   
-            republish-to-dlq: true                  
+            backOffMultiplier: 4                  
        
-        direct-xd-delivery-output: 
+        direct-xd-delivery-out-0: 
           destination: direct-xd-delivery-process          
           
-        direct-xd-delivery-input: 
-          destination: direct-xd-delivery    
-          group: direct-xd-delivery-group     
+        directXDDeliveryInput-in-0: 
+          destination: direct-xd-delivery-process  
+          group: direct-xd-delivery-process-group                    
           
-        direct-sta-last-mile-output:   
-          destination: direct-sta-last-mile-delivery   
-            
+        direct-sta-last-mile-out-0: 
+          destination: direct-sta-last-mile-delivery  
+       
