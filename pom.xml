@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nhind</groupId>
 	<artifactId>direct-sta-sboot</artifactId>
-	<version>8.0.0-SNAPSHOT</version>
+	<version>8.0.0</version>
 	<packaging>jar</packaging>
 	<name>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</name>
     <description>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</description>	
@@ -136,27 +136,27 @@
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-msg-monitor-model</artifactId>
-			<version>8.0.0-SNAPSHOT</version>
+			<version>8.0.0</version>
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-common</artifactId>
-			<version>8.0.0-SNAPSHOT</version>	
+			<version>8.0.0</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>gateway</artifactId>
-			<version>8.0.0-SNAPSHOT</version>	
+			<version>8.0.0</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>agent</artifactId>
-			<version>8.0.0-SNAPSHOT</version>	
+			<version>8.0.0</version>	
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>xdmail</artifactId>
-			<version>8.0.0-SNAPSHOT</version>	
+			<version>8.0.0</version>	
 		</dependency>					 		 
 	      <dependency>
 			<groupId>commons-net</groupId>
@@ -177,14 +177,7 @@
 		    <groupId>org.bouncycastle</groupId>
 		    <artifactId>bcpkix-jdk15on</artifactId>
 		    <version>${bcpkix-jdk15on.version}</version>    
-		 </dependency> 
-		 <!--  
-		 <dependency>
-		    <groupId>com.google.guava</groupId>
-		    <artifactId>guava</artifactId>
-		    <version>18.0</version>    
-		 </dependency>	
-		 -->		 		    	
+		 </dependency> 	 		    	
 		 <!--  Database Drivers For Connectivity Options --> 		             	    
 		<dependency>
 		    <groupId>com.h2database</groupId>
