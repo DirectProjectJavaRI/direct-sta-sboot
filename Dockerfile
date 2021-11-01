@@ -1,4 +1,11 @@
-FROM openjdk:8u282-jre
+FROM azul/zulu-openjdk-alpine:8u282-jre
+
+# Run system update
+RUN apk update
+RUN apk upgrade --ignore zulu8-*
+RUN apk add --no-cache --upgrade bash
+RUN apk add --no-cache curl && \
+    rm -rf /var/cache/apk/*
 
 # When build images, name with this tag
 LABEL tag=sta
@@ -7,7 +14,7 @@ LABEL tag=sta
 ARG BUILD_VERSION=8.1.0-SNAPSHOT
 
 # Create and use local user and group
-RUN addgroup direct && adduser direct --ingroup direct
+RUN addgroup -S direct && adduser -S -D direct -G direct
 
 # Set application location
 RUN mkdir -p /opt/app
