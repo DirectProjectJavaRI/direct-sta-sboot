@@ -13,7 +13,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
-@ComponentScan(basePackages = {"org.nhindirect.gateway.springconfig", "org.nhindirect.gateway.streams", "org.nhind.xdm.springconfig"})
+@ComponentScan(basePackages = {"org.nhindirect.gateway.springconfig", "org.nhindirect.gateway.streams", "org.nhind.xdm.springconfig", "org.nhindirect.stagent.springconfig", "org.nhind.xd.springconfig", "org.nhind.xd.streams"})
 @SpringBootApplication
 @Configuration
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class, DataSourceTransactionManagerAutoConfiguration.class, 
