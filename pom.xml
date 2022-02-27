@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nhind</groupId>
 	<artifactId>direct-sta-sboot</artifactId>
-	<version>8.1.0-SNAPSHOT</version>
+	<version>8.1.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<name>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</name>
     <description>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</description>	
@@ -73,7 +73,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>         
-        </dependency>	 	          	        	
+        </dependency>
 	    <dependency>
 	    	<groupId>org.springframework.boot</groupId>
 	    	<artifactId>spring-boot-starter-security</artifactId>
@@ -146,7 +146,7 @@
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>gateway</artifactId>
-			<version>8.0.0</version>	
+			<version>8.1.2-SNAPSHOT</version>
 		</dependency>	
 		<dependency>
 			<groupId>org.nhind</groupId>
@@ -156,7 +156,7 @@
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>xdmail</artifactId>
-			<version>8.0.0</version>	
+			<version>8.1.2-SNAPSHOT</version>
 		</dependency>					 		 
 	      <dependency>
 			<groupId>commons-net</groupId>
@@ -203,8 +203,12 @@
 		    <groupId>org.postgresql</groupId>
 		    <artifactId>postgresql</artifactId>
 			<scope>runtime</scope>	  		    
-		</dependency>		    	    									        	 	            		
-	</dependencies>
+		</dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+  </dependencies>
 	<build>
 		<plugins>
 		      <plugin>
@@ -339,24 +343,25 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<distributionManagement>
-		<site>
-			<id>nhind-site</id>
-			<name>NHIN Direct API publication site</name>
-			<url>sftp://api.nhindirect.org/x/www/api.nhindirect.org/java/site/direct-sta-sboot/${project.version}</url>
-		</site>
-        <snapshotRepository>
-            <id>sonatype-snapshot</id>
-            <name>Sonatype OSS Maven SNAPSHOT Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <uniqueVersion>false</uniqueVersion>
-         </snapshotRepository>
-         <repository>
-            <id>sonatype-release</id>
-            <name>Sonatype OSS Maven Release Repositor</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-            <uniqueVersion>false</uniqueVersion>
-         </repository>				
-	</distributionManagement>
+
+  <distributionManagement>
+    <site>
+      <id>nhind-site</id>
+      <name>NHIN Direct API publication site</name>
+      <url>sftp://api.nhindirect.org/x/www/api.nhindirect.org/java/site/direct-sta-sboot/${project.version}</url>
+    </site>
+    <snapshotRepository>
+      <id>sonatype-snapshot</id>
+      <name>Sonatype OSS Maven SNAPSHOT Repository</name>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </snapshotRepository>
+    <repository>
+      <id>sonatype-release</id>
+      <name>Sonatype OSS Maven Release Repositor</name>
+      <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+      <uniqueVersion>false</uniqueVersion>
+    </repository>
+  </distributionManagement>
 
 </project>
