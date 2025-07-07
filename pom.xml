@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.nhind</groupId>
 	<artifactId>direct-sta-sboot</artifactId>
-	<version>8.0.0</version>
+	<version>8.1.0</version>
 	<packaging>jar</packaging>
 	<name>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</name>
     <description>Direct Java RI Security and Trust Agent Standalone Spring Boot Micro-service Application</description>	
@@ -40,9 +40,6 @@
     </licenses>       
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <bcprov-jdk15on.version>1.68</bcprov-jdk15on.version>
-        <bcmail-jdk15on.version>1.68</bcmail-jdk15on.version>	
-        <bcpkix-jdk15on.version>1.68</bcpkix-jdk15on.version>	
 	</properties>
 	<dependencyManagement>
 		<dependencies>											
@@ -85,6 +82,20 @@
 		<dependency>
 		    <groupId>org.springframework.cloud</groupId>
 		    <artifactId>spring-cloud-starter-bootstrap</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcprov-jdk15on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcmail-jdk15on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcpkix-jdk15on</artifactId>
+				</exclusion>
+			</exclusions>		    
 		</dependency>	     
 		<dependency>
   			<groupId>org.springframework.boot</groupId>
@@ -94,10 +105,18 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-config</artifactId>
 		    <exclusions>
-		        <exclusion>
-		            <groupId>org.bouncycastle</groupId>
-		            <artifactId>bcpkix-jdk15on</artifactId>
-		        </exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcprov-jdk15on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcmail-jdk15on</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.bouncycastle</groupId>
+					<artifactId>bcpkix-jdk15on</artifactId>
+				</exclusion>
 		    </exclusions>				
 		</dependency>	 			
 		<dependency>
@@ -136,48 +155,23 @@
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>direct-msg-monitor-model</artifactId>
-			<version>8.0.0</version>
-		</dependency>	
-		<dependency>
-			<groupId>org.nhind</groupId>
-			<artifactId>direct-common</artifactId>
-			<version>8.0.0</version>	
-		</dependency>	
+			<version>8.1.0</version>
+		</dependency>		
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>gateway</artifactId>
-			<version>8.0.0</version>	
-		</dependency>	
-		<dependency>
-			<groupId>org.nhind</groupId>
-			<artifactId>agent</artifactId>
-			<version>8.0.0</version>	
-		</dependency>	
+			<version>8.1.0</version>	
+		</dependency>		
 		<dependency>
 			<groupId>org.nhind</groupId>
 			<artifactId>xdmail</artifactId>
-			<version>8.0.0</version>	
+			<version>8.1.0</version>	
 		</dependency>					 		 
 	      <dependency>
 			<groupId>commons-net</groupId>
 			<artifactId>commons-net</artifactId>
 			<version>3.6</version>
-		  </dependency>	
-		  <dependency>
-		    <groupId>org.bouncycastle</groupId>
-		    <artifactId>bcprov-jdk15on</artifactId>
-		    <version>${bcprov-jdk15on.version}</version>    
-		  </dependency>  
-		  <dependency>
-		    <groupId>org.bouncycastle</groupId>
-		    <artifactId>bcmail-jdk15on</artifactId>
-		    <version>${bcmail-jdk15on.version}</version>	    
-		  </dependency>
-		  <dependency>
-		    <groupId>org.bouncycastle</groupId>
-		    <artifactId>bcpkix-jdk15on</artifactId>
-		    <version>${bcpkix-jdk15on.version}</version>    
-		 </dependency> 	 		    	
+		  </dependency>		    	
 		 <!--  Database Drivers For Connectivity Options --> 		             	    
 		<dependency>
 		    <groupId>com.h2database</groupId>
@@ -290,8 +284,17 @@
                     </goals>
                  </execution>
                </executions>
-            </plugin>
+            </plugin>         
             -->
+	        <plugin>
+	          <groupId>org.sonatype.central</groupId>
+	          <artifactId>central-publishing-maven-plugin</artifactId>
+	          <version>0.8.0</version>
+	          <extensions>true</extensions>
+	          <configuration>
+	            <publishingServerId>central</publishingServerId>
+	          </configuration>
+	        </plugin>    
 		</plugins>			
 	</build>
 	<reporting>
@@ -339,24 +342,4 @@
 			</plugin>
 		</plugins>
 	</reporting>
-	<distributionManagement>
-		<site>
-			<id>nhind-site</id>
-			<name>NHIN Direct API publication site</name>
-			<url>sftp://api.nhindirect.org/x/www/api.nhindirect.org/java/site/direct-sta-sboot/${project.version}</url>
-		</site>
-        <snapshotRepository>
-            <id>sonatype-snapshot</id>
-            <name>Sonatype OSS Maven SNAPSHOT Repository</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <uniqueVersion>false</uniqueVersion>
-         </snapshotRepository>
-         <repository>
-            <id>sonatype-release</id>
-            <name>Sonatype OSS Maven Release Repositor</name>
-            <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-            <uniqueVersion>false</uniqueVersion>
-         </repository>				
-	</distributionManagement>
-
 </project>
