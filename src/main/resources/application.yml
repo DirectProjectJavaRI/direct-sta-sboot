@@ -1,3 +1,6 @@
+server.port: 8090
+
+
 #Default the security credentials to call the config service. Override these
 #for your deployment.
 direct:
@@ -10,17 +13,18 @@ direct:
 
   config:
     service:
-      url: http://localhost:8080/config-service
+      url: http://localhost:8082/
   msgmonitor:
     service:
-      url: http://localhost:8080/msg-monitor
+      url: http://localhost:8081/
 
-spring: 
+spring:
+  config.import: 'optional:configserver:'
   cloud: 
+    function:
+      definition: directSmtpGatewayMessageInput;directStaProcessorInput;directStaPostProcessInput;directSmtpRemoteDeliveryInput;directXDDeliveryInput
     stream: 
-      source: direct-smtp-gateway-message;direct-smtp-remote-delivery;direct-sta-processor;direct-sta-post-process;direct-sta-last-mile;direct-xd-delivery
-      function:
-        definition: directSmtpGatewayMessageInput;directStaProcessorInput;directStaPostProcessInput;directSmtpRemoteDeliveryInput;directXDDeliveryInput
+      output-bindings: direct-smtp-gateway-message;direct-smtp-remote-delivery;direct-sta-processor;direct-sta-post-process;direct-sta-last-mile;direct-xd-delivery
     
       bindings: 
         direct-smtp-gateway-message-out-0:
@@ -82,4 +86,30 @@ spring:
           
         direct-sta-last-mile-out-0: 
           destination: direct-sta-last-mile-delivery  
+
+  application:
+    name: direct-sta-sboot
+  jpa:
+    open_in_view: false
+
+  main:
+    allow-bean-definition-overriding: true
+
+  jmx:
+    default-domain: direct-sta-sboot
+
+
+
+#Don't use rabbit as part of the health check
+management:
+  health:
+    rabbit:
+      enabled: false
+
+#unique jmx names to avoid collisions when running
+#multiple spring boot apps in an web container
+endpoints:
+  jmx:
+    default-domain: direct-sta-sboot
+    uniqueNames: true
        
