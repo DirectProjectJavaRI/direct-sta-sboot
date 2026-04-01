@@ -72,10 +72,13 @@ spring:
           group: direct-sta-remoted-delivery-group
           consumer:
             concurrency: 10             
-            maxAttempts: 5
-            backOffInitialInterval: 360000 
-            backOffMaxInterval: 92160000  
-            backOffMultiplier: 4                  
+            maxAttempts: 5 
+            # Start with a 2-minute initial delay
+            backOffInitialInterval: 120000 
+            # Cap the maximum single delay at 10 minutes
+            backOffMaxInterval: 600000     
+            # Use a 1.8x multiplier to scale more gradually
+            backOffMultiplier: 1.8     
        
         direct-xd-delivery-out-0: 
           destination: direct-xd-delivery-process          
