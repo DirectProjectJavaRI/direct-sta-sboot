@@ -19,6 +19,11 @@ direct:
       url: http://localhost:8081/
 
 spring:
+
+  threads:
+    virtual:
+      enabled: true
+
   config.import: 'optional:configserver:'
   cloud: 
     function:
