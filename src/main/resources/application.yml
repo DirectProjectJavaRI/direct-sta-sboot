@@ -77,7 +77,10 @@ spring:
           group: direct-sta-remoted-delivery-group
           consumer:
             concurrency: 10             
-            maxAttempts: 5 
+            #maxAttempts: 5
+            #For now, we are not going to be resilient because a bad message monopolizes the queue
+            #A destination HISP that is down with multiple messgae sent to it could completely starve out remote processing.
+            maxAttempts: 1
             # Start with a 2-minute initial delay
             backOffInitialInterval: 120000 
             # Cap the maximum single delay at 10 minutes
