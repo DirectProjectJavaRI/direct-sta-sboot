@@ -1,3 +1,6 @@
+server.port: 8090
+
+
 #Default the security credentials to call the config service. Override these
 #for your deployment.
 direct:
@@ -10,17 +13,23 @@ direct:
 
   config:
     service:
-      url: http://localhost:8080/config-service
+      url: http://localhost:8082/
   msgmonitor:
     service:
-      url: http://localhost:8080/msg-monitor
+      url: http://localhost:8081/
 
-spring: 
+spring:
+
+  threads:
+    virtual:
+      enabled: true
+
+  config.import: 'optional:configserver:'
   cloud: 
+    function:
+      definition: directSmtpGatewayMessageInput;directStaProcessorInput;directStaPostProcessInput;directSmtpRemoteDeliveryInput;directXDDeliveryInput
     stream: 
-      source: direct-smtp-gateway-message;direct-smtp-remote-delivery;direct-sta-processor;direct-sta-post-process;direct-sta-last-mile;direct-xd-delivery
-      function:
-        definition: directSmtpGatewayMessageInput;directStaProcessorInput;directStaPostProcessInput;directSmtpRemoteDeliveryInput;directXDDeliveryInput
+      output-bindings: direct-smtp-gateway-message;direct-smtp-remote-delivery;direct-sta-processor;direct-sta-post-process;direct-sta-last-mile;direct-xd-delivery
     
       bindings: 
         direct-smtp-gateway-message-out-0:
@@ -68,10 +77,16 @@ spring:
           group: direct-sta-remoted-delivery-group
           consumer:
             concurrency: 10             
-            maxAttempts: 5
-            backOffInitialInterval: 360000 
-            backOffMaxInterval: 92160000  
-            backOffMultiplier: 4                  
+            #maxAttempts: 5
+            #For now, we are not going to be resilient because a bad message monopolizes the queue
+            #A destination HISP that is down with multiple messgae sent to it could completely starve out remote processing.
+            maxAttempts: 1
+            # Start with a 2-minute initial delay
+            backOffInitialInterval: 120000 
+            # Cap the maximum single delay at 10 minutes
+            backOffMaxInterval: 600000     
+            # Use a 1.8x multiplier to scale more gradually
+            backOffMultiplier: 1.8     
        
         direct-xd-delivery-out-0: 
           destination: direct-xd-delivery-process          
@@ -82,4 +97,30 @@ spring:
           
         direct-sta-last-mile-out-0: 
           destination: direct-sta-last-mile-delivery  
+
+  application:
+    name: direct-sta-sboot
+  jpa:
+    open_in_view: false
+
+  main:
+    allow-bean-definition-overriding: true
+
+  jmx:
+    default-domain: direct-sta-sboot
+
+
+
+#Don't use rabbit as part of the health check
+management:
+  health:
+    rabbit:
+      enabled: false
+
+#unique jmx names to avoid collisions when running
+#multiple spring boot apps in an web container
+endpoints:
+  jmx:
+    default-domain: direct-sta-sboot
+    uniqueNames: true
        
